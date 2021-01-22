@@ -26,16 +26,16 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">&ltdiv&gt</a></li>
-        <li><a href="#">&ltspan&gt</a></li>
-        <li><a href="#">&ltadress&gt</a></li>
+        <li><a href="#cont1">&ltdiv&gt</a></li>
+        <li><a href="#cont2">&ltspan&gt</a></li>
+        <li><a href="#cont3">&ltbutton&gt</a></li>
       </ul>
     </div>
   </div>
 </nav>
 
 <!-- First Container -->
-<div class="container-fluid bg-1 text-center">
+<div id = "cont1" class="container-fluid bg-1 text-center">
   <h3 class="margin">&ltdiv&gt</h3>
 
   
@@ -49,18 +49,35 @@
 </div>
 
 <!-- Second Container -->
-<div class="container-fluid bg-2 text-center">
+<div id = "cont2" class="container-fluid bg-2 text-center">
   <h3 class="margin">&ltspan&gt</h3>
   <p> <span style="color:red">&ltspan&gt</span> tiek izmantots, lai izkrāsot kādu daļu no teksta.</p>
+  
+
+  <img src="images/span.png" class="img-responsive margin" style="display:inline" alt="DIV" width="942" height="210">
+  <br>
   <a href="https://www.w3schools.com/tags/tag_span.asp" class="btn btn-default btn-lg">
     <span class="glyphicon glyphicon-console"></span> Vairāk informācijas
   </a>
 </div>
 
 <!-- Third Container (Grid) -->
-<div class="container-fluid bg-3 text-center">    
-  <h3 class="margin">&ltadress&gt</h3><br>
-  <div class="row">
+<div id = "cont3" class="container-fluid bg-3 text-center">    
+  <h3 class="margin">&ltbutton&gt</h3><br>
+  <h3>
+    Izveido pogu uz kuras var uzspiest. <br>
+    Var izmantot, lai palaist javascriptu. 
+  </h3>
+
+  <img src="images/button.png" class="img-responsive margin" style="display:inline" alt="DIV" width="942" height="210">
+  <br>
+  <button class="btn btn-default btn-lg" onclick="alert('Poga uzspiesta')">Uzspied mani</button>
+
+  
+
+
+
+  <!-- <div class="row">
     <div class="col-sm-4">
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       <img src="birds1.jpg" class="img-responsive margin" style="width:100%" alt="Image">
@@ -73,7 +90,7 @@
       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
       <img src="birds3.jpg" class="img-responsive margin" style="width:100%" alt="Image">
     </div>
-  </div>
+  </div> -->
 </div>
 
 <!-- Footer -->

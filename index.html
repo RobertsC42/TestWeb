@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 
-  <title>Bootstrap Theme Simply Me</title>
+  <title>HTML tagi</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -29,6 +29,7 @@
         <li><a href="#cont1">&ltdiv&gt</a></li>
         <li><a href="#cont2">&ltspan&gt</a></li>
         <li><a href="#cont3">&ltbutton&gt</a></li>
+        <li><a href="#css">CSS</a></li>
       </ul>
     </div>
   </div>
@@ -93,9 +94,81 @@
   </div> -->
 </div>
 
+
+<div id = "css" class="container-fluid bg-1 text-center">
+  <h2 class="margin">CSS</h2>
+
+  <div class="row">
+    <div class="col-sm-4">
+      <h3 id="hoverable">Izmantojot CSS var mainīt elementa stilu atkarība no tā, vai pele atrodas uz tā. (Ir iespējams izmēģināt uz šī teksta)</h3>
+      <img src="images/hover.png"  class="img-responsive margin" style="width:100%" alt="Image">
+    </div>
+    <div class="col-sm-4"> 
+      <h3>Izmantojot CSS, var veidot animācijas.</h3>
+      <svg xmlns="http://www.w3.org/2000/svg" style="width:100%" xmlns:xlink="http://www.w3.org/1999/xlink" width="110mm" height="80mm" viewBox="0 90 210 140">
+          <defs>
+              <linearGradient id="a">
+                  <stop offset="0" stop-color="#80f" stop-opacity="0"/>
+                  <stop offset=".458" stop-color="#8700ff" stop-opacity=".971"/>
+                  <stop offset=".581" stop-color="#00817f"/>
+                  <stop offset=".713" stop-color="#0f0"/>
+                  <stop offset=".798" stop-color="#fff800"/>
+                  <stop offset=".89" stop-color="#ffb700"/>
+                  <stop offset="1" stop-color="red"/>
+              </linearGradient>
+              <linearGradient xlink:href="#a" id="b" x1="155.427" y1="175.006" x2="169.226" y2="126.587" gradientUnits="userSpaceOnUse"/>
+          </defs>
+          
+          <path d="M84.724 132.095L0 154.01v4.009l82.052-21.382z" fill="#e6e6e6" stroke="#e6e6e6" stroke-width=".265"/>
+          <rect id="firstMovable" x="0" y="100" width="120" height="100"  />
+          
+          <path d="M128.022 123.308l81.785 12.829.534 34.21-75.103-32.607z" fill="url(#b)"/>
+          <path fill="none" paint-order="stroke fill markers" d="M123.976 84.955h83.533v15.119h-83.533z"/>
+          <rect id="secondMovable" x="120" y="100" width="120" height="100"  />
+          
+
+          <path d="M108.857 94.301l29.833 51.672 29.832 51.671H49.192l29.833-51.671z" stroke="#e6e6e6" stroke-width="4" paint-order="stroke fill markers"/>
+
+      </svg>
+
+      <p>Animācijā tiek izmantots svg un keyframes. Animācijā tiek pravietoti paslēpti taisnstūri, kas atklāj starus. </p>
+
+
+      <div class="seeImage">
+        <img src="images/animation1.png" class="img-responsive margin" style="width:100%" alt="ANIMATION1">
+        
+      </div>
+      <div>
+        <img src="images/animation2.png" class="img-responsive margin" style="width:100%" alt="ANIMATION2">
+      </div>
+      
+    
+    
+    </div>
+    <div class="col-sm-4"> 
+      <h3>Ar CSS var veikt 3D transformācijas.</h3>
+      <div class="cube-container img-responsive margin">
+        <div class="cube">
+          <figure class="side front"></figure>
+          <figure class="side back"></figure>
+          <figure class="side left"></figure>
+          <figure class="side right"></figure>
+          <figure class="side top"></figure>
+          <figure class="side bottom"></figure>
+      </div>
+      </div>
+      <p>Paneļi tiek pagriezti un pārvietoti izmantojot transform. Animācija izmanto keyframes.</p>
+      <img src="images/3d1.png" class="img-responsive margin" style="width:100%" alt="Image">
+      <img src="images/3d2.png" class="img-responsive margin" style="width:100%" alt="Image">
+    </div>
+  </div> 
+
+</div>
+
 <!-- Footer -->
 <footer class="container-fluid bg-4 text-center">
   <!-- <p>Bootstrap Theme Made By [<a href="https://www.w3schools.com">www.w3schools.com]</a></p> -->
+  <!--<p>Gadījumā, ja kāda no pēdējām bildēm ir grūti saskatāma, to var palielināt, uzliekot peli uz tās.</p> -->
 </footer>
 
 </body>

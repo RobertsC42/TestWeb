@@ -44,15 +44,11 @@ p {font-size: 16px;}
 
 #firstMovable {
   fill: #1abc9c;
-
-
   animation: movement 4s  infinite;
-
 }
 
 #secondMovable {
   fill: #1abc9c;
-
   animation: movement 4s  0.9s infinite;
 }
 
@@ -61,7 +57,6 @@ p {font-size: 16px;}
   50% {transform: translate(120px, 0px);}
   50.01% {transform: translate(-120px, 0px);}
   100% {transform: translate(0px, 0px);}
-  
 }
 
 
@@ -137,4 +132,17 @@ p {font-size: 16px;}
   100% {
     transform:rotateY(-360deg);
   }
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
+}
+.navbar{
+  z-index: 2;
 }

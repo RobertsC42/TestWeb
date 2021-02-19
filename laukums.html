@@ -7,7 +7,39 @@
   <link rel="stylesheet" href="css/laukumsStils.css">
 </head>
 <body>
-<p>test</p>
+  <form>
+    <label for "n">Laukuma malas izmērs</label>
+    <input type = "number" id="n" name="n" value="3">
+
+  </form>
+  <button id="generate">Izveidot laukumu</button>
+  <table id="laukums"></table>
+  <script>
+    function poga(){
+      let n = parseInt(document.getElementById("n").value);
+      console.log(n);
+      let table = document.getElementById("laukums");
+      table.innerHTML = '';
+      for(let i =0; i< n; i++){
+        let row = table.insertRow(i);
+        for(let j =0; j< n; j++){
+          let button = document.createElement('BUTTON');
+          button.classList.add("grid")
+          var text = document.createTextNode(i*n+j+1);
+          button.appendChild(text);
+          // laukums.appendChild(button);
+          let cell = row.insertCell(j);
+          cell.appendChild(button);
+        }   
+      }
+
+    }
+
+    let generatePoga = document.getElementById("generate");
+    console.log(generatePoga);
+    generatePoga.addEventListener("click", poga);
+
+  </script>
 </body>
 </html>
 

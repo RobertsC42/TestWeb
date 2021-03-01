@@ -5,68 +5,17 @@
   <title>HTML tagi</title>
   <meta charset="utf-8">
   <link rel="stylesheet" href="css/laukumsStils.css">
+  <script type="text/javascript" src="nosaukumi.json"></script>
+  <script src="js/main.js"></script>
 </head>
 <body>
   <form>
-    <label for "n">Laukuma malas izmērs</label>
+    <label for "n">Laukuma malas izmērs (starp 2 un 13)</label>
     <input type = "number" id="n" name="n" value="3">
 
   </form>
   <button id="generate">Izveidot laukumu</button>
   <table id="laukums"></table>
-  <script>
-    function poga(){
-      let n = parseInt(document.getElementById("n").value);
-      //console.log(n);
-      let table = document.getElementById("laukums");
-      table.innerHTML = '';
-      for(let i =0; i< n; i++){
-        let row = table.insertRow(i);
-        for(let j =0; j< n; j++){
-          let button = document.createElement('BUTTON');
-          button.classList.add("grid")
-          var text = document.createTextNode(i*n+j+1);
-          button.appendChild(text);
-          // laukums.appendChild(button);
-          let cell = row.insertCell(j);
-          cell.appendChild(button);
-        }   
-      }
-      fitToScreen();
-
-    }
-
-    let generatePoga = document.getElementById("generate");
-    //console.log(generatePoga);
-    generatePoga.addEventListener("click", poga);
-    function fitToScreen(){
-      console.log('bruh');
-      let elements = document.getElementsByClassName('grid');
-      let table = document.getElementById("laukums");
-
-      let width = window.screen.width;
-      let height = window.screen.height - table.getBoundingClientRect().top -100;
-      
-      console.log(width);
-      console.log(height);
-
-      console.log(elements)
-
-      console.log(elements.length)
-      let size = Math.floor(Math.min(width, height)/(Math.sqrt(elements.length)));
-      for(let i=0; i< elements.length; i++){
-        elements[i].style.width = `${size-50}px`;
-        elements[i].style.height = `${size-50}px`;
-
-      }
-
-    }
-
-    window.addEventListener('resize', fitToScreen);
-    window.addEventListener('load', fitToScreen);
-    
-
-  </script>
 </body>
 </html>
 

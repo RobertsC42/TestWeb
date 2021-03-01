@@ -1,6 +1,19 @@
 .grid {
+  margin: 0;
+  min-width: none;
+  min-height: none;
   width: 100%;
-  margin: 0%;
+  height: 100%;
 }
-
-
+td {
+  min-width: 0px;
+  min-height: 0px;
+  padding:0px
+  
+}
+table {
+  border-spacing: 0px;
+}
+body{
+  overflow:hidden;
+}

@@ -24,11 +24,7 @@ function poga(){
   let content = new Array();
   for(result in pairs){
     content.push(`url(svg/${pairs[result][0]}) center no-repeat`);
-    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='200px'> \
-    <foreignObject x="0" y="0" width="200" height="50"> \
-    <p xmlns="http://www.w3.org/1999/xhtml">${pairs[result][1]}</p> \
-    </foreignObject> \
-    </svg>") center no-repeat`);
+    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='200px'><text x='0' y='15' fill='black' font-size='20'>${pairs[result][1]}</text></svg>"); center no-repeat;`);
   }
   console.log(content);
   
@@ -51,12 +47,12 @@ function poga(){
 
   fitToScreen();
 
-  /*let k =0;
+  let k =0;
   while(content.length > 0){
     buttons[k].style.background = content.splice(Math.floor(Math.random()* content.length), 1);
     buttons[k].style.backgroundSize = 'contain';
     k++
-  }*/
+  }
 
 }
 

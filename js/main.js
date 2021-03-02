@@ -24,8 +24,8 @@ function poga(){
   let content = new Array();
   for(result in pairs){
     content.push(`url(svg/${pairs[result][0]}) center no-repeat`)
-    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='200px'> \
-    <text x='0' y='15' fill='black' font-size='20'>${pairs[result][1]}</text>\
+    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50%' width='100%'> \
+    <text textLength = '90%' lengthAdjust = 'spacingAndGlyphs' x='5%' y='55%' fill='black' font-size='30px'>${pairs[result][1]}</text>\
     </svg>") center no-repeat`)
   }
   console.log(content);

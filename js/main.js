@@ -23,8 +23,10 @@ function poga(){
   // Transforms flags and names into viewable content
   let content = new Array();
   for(result in pairs){
-    content.push(`url(svg/${pairs[result][0]}) center no-repeat`);
-    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='200px'><text x='0' y='15' fill='black' font-size='20'>${pairs[result][1]}</text></svg>"); center no-repeat;`);
+    content.push(`url(svg/${pairs[result][0]}) center no-repeat`)
+    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50px' width='200px'> \
+    <text x='0' y='15' fill='black' font-size='20'>${pairs[result][1]}</text>\
+    </svg>") center no-repeat`)
   }
   console.log(content);
   
@@ -36,6 +38,7 @@ function poga(){
     for(let j =0; j< n; j++){
       let button = document.createElement('BUTTON');
       button.classList.add("grid")
+      // let fN =  pairs[i*n+j][0];
       //button.style.background = `url(svg/${fN}) center no-repeat`
       button.style.backgroundSize = 'contain';
       var text = document.createTextNode(i*n+j+1);
@@ -45,14 +48,14 @@ function poga(){
     }   
   }
 
-  fitToScreen();
-
   let k =0;
-  while(content.length > 0){
-    buttons[k].style.background = content.splice(Math.floor(Math.random()* content.length), 1);
+  while(content.length>0){
+    buttons[k].style.background = content.splice(Math.floor(Math.random()*content.length), 1);
     buttons[k].style.backgroundSize = 'contain';
-    k++
+    k++;
   }
+
+  fitToScreen();
 
 }
 

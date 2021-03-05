@@ -1,5 +1,37 @@
 var countryData;
 
+
+function generateBestFontSize(text, width){
+  let min = 1;
+  let max = 100;
+
+
+  let best = min;
+  let lastpivot = -1;
+  let pivot = Math.floor((min+max)/2);
+  while(lastpivot !== pivot){
+    // console.log(pivot);
+    if(getTextWidth(text, `${pivot}px arial`) > width){
+      max = pivot;
+    }else{
+      best = pivot;
+      min = pivot;
+    }
+    lastpivot = pivot;
+    pivot = Math.floor((min+max)/2);
+  }  
+  return best;
+}
+
+function getTextWidth(text, font) {
+  // re-use canvas object for better performance
+  var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
+  var context = canvas.getContext("2d");
+  context.font = font;
+  var metrics = context.measureText(text);
+  return metrics.width;
+}
+
 function generatePairs(n){
   let arr = new Array();
   for (const key in countryData){
@@ -24,8 +56,10 @@ function poga(){
   let content = new Array();
   for(result in pairs){
     content.push(`url(svg/${pairs[result][0]}) center no-repeat`)
-    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50%' width='100%'> \
-    <text textLength = '90%' lengthAdjust = 'spacingAndGlyphs' x='5%' y='60%' fill='black' >${pairs[result][1]}</text>\
+    //let fontSize = Math.floor(450/pairs[result][1].length);
+    let fontSize = generateBestFontSize(`${pairs[result][1]}`, 300)
+    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='300px' width='300px'> \
+    <text x='0%' y='60%' fill='black' font-family='arial' font-size='${fontSize}px' >${pairs[result][1]}</text>\
     </svg>") center no-repeat`)
   }
   

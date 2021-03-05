@@ -69,15 +69,17 @@ function poga(){
   for(let i =0; i< n; i++){
     let row = table.insertRow(i);
     for(let j =0; j< n; j++){
-      let button = document.createElement('BUTTON');
-      button.classList.add("grid")
-      // let fN =  pairs[i*n+j][0];
-      //button.style.background = `url(svg/${fN}) center no-repeat`
-      button.style.backgroundSize = 'contain';
-      var text = document.createTextNode(i*n+j+1);
-      let cell = row.insertCell(j);
-      cell.appendChild(button);
-      buttons.push(button);
+      if(i*n+j < content.length){
+        let button = document.createElement('BUTTON');
+        button.classList.add("grid")
+        // let fN =  pairs[i*n+j][0];
+        //button.style.background = `url(svg/${fN}) center no-repeat`
+        button.style.backgroundSize = 'contain';
+        var text = document.createTextNode(i*n+j+1);
+        let cell = row.insertCell(j);
+        cell.appendChild(button);
+        buttons.push(button);
+      }
     }   
   }
 
@@ -95,11 +97,17 @@ function poga(){
 
 
 window.onload = () => {
-  let generatePoga = document.getElementById("generate");
-  generatePoga.addEventListener("click", poga);
   fetch("nosaukumi.json")
     .then(response => response.json())
-    .then(json => countryData = json)
+    .then((json) => {
+      console.log('JSon loaded')
+      countryData = json
+      let generatePoga = document.getElementById("generate");
+      generatePoga.addEventListener("click", poga);
+      
+      window.addEventListener('resize', fitToScreen);
+      window.addEventListener('load', fitToScreen);
+    }).catch((err) => alert(err));
 };
 
 function fitToScreen(){
@@ -112,7 +120,8 @@ function fitToScreen(){
   let width = vw
   let height = vh - table.getBoundingClientRect().top;
   
-  let size = Math.floor(Math.min(width, height)/(Math.floor(Math.sqrt(elements.length))+1));
+  // let size = Math.floor(Math.min(width, height)/(Math.floor(Math.sqrt(elements.length))+1));
+  let size = (Math.min(width, height)/((Math.sqrt(elements.length))));
   for(let i=0; i< elements.length; i++){
     //elements[i].style.visibility = "visible";
     elements[i].style.width = `${size}px`;
@@ -122,6 +131,3 @@ function fitToScreen(){
   table.style.width = width;
   table.style.height = height
 }
-
-window.addEventListener('resize', fitToScreen);
-window.addEventListener('load', fitToScreen);

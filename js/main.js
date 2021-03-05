@@ -14,7 +14,7 @@ function generateBestFontSize(text, width){
     if(getTextWidth(text, `${pivot}px arial`) > width){
       max = pivot;
     }else{
-      best = pivot;
+      best = Math.max(pivot, best);
       min = pivot;
     }
     lastpivot = pivot;
@@ -55,12 +55,12 @@ function poga(){
   // Transforms flags and names into viewable content
   let content = new Array();
   for(result in pairs){
-    content.push(`url(svg/${pairs[result][0]}) center no-repeat`)
+    content.push(`url(svg/${pairs[result][0]}) center no-repeat, #6DB3F2`)
     //let fontSize = Math.floor(450/pairs[result][1].length);
     let fontSize = generateBestFontSize(`${pairs[result][1]}`, 300)
     content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='300px' width='300px'> \
     <text x='0%' y='60%' fill='black' font-family='arial' font-size='${fontSize}px' >${pairs[result][1]}</text>\
-    </svg>") center no-repeat`)
+    </svg>") center no-repeat, #6DB3F2`)
   }
   
 

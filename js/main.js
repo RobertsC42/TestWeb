@@ -23,12 +23,12 @@ function poga(){
   // Transforms flags and names into viewable content
   let content = new Array();
   for(result in pairs){
-    content.push(`url(svg/${pairs[result][0]}) center no-repeat`)
-    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50%' width='100%'> \
-    <text textLength = '90%' lengthAdjust = 'spacingAndGlyphs' x='5%' y='55%' fill='black' font-size='30px'>${pairs[result][1]}</text>\
-    </svg>") center no-repeat`)
+    content.push({data: `url(svg/${pairs[result][0]}) center no-repeat`, type: "image"});
+    content.push({data: `${pairs[result][1]}`, type: "text"});
+    /*content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='50%' width='100%'> \
+    <text textLength = '90%' lengthAdjust = 'spacingAndGlyphs' x='5%' y='60%' fill='black' >${pairs[result][1]}</text>\
+    </svg>") center no-repeat`)*/
   }
-  console.log(content);
   
 
   //Generate buttons 
@@ -40,7 +40,6 @@ function poga(){
       button.classList.add("grid")
       // let fN =  pairs[i*n+j][0];
       //button.style.background = `url(svg/${fN}) center no-repeat`
-      button.style.backgroundSize = 'contain';
       var text = document.createTextNode(i*n+j+1);
       let cell = row.insertCell(j);
       cell.appendChild(button);
@@ -50,8 +49,17 @@ function poga(){
 
   let k =0;
   while(content.length>0){
-    buttons[k].style.background = content.splice(Math.floor(Math.random()*content.length), 1);
-    buttons[k].style.backgroundSize = 'contain';
+    let item = content.splice(Math.floor(Math.random()*content.length), 1)[0];
+    console.log(item);
+    console.log(item.type);
+    if(item.type ==='image'){
+      console.log('here');
+      buttons[k].style.background = item.data;
+      buttons[k].style.backgroundSize = 'contain';
+    }else if(item.type ==='text'){
+      console.log('here2');
+      buttons[k].innerHTML = item.data;
+    }
     k++;
   }
 

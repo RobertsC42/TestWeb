@@ -67,12 +67,13 @@ function removeClicked(element){
 
 
 function win(){
+  confetti.start();
   alert('good job you won')
 }
 
 
 function poga(){
-  
+  confetti.stop();
   let n = parseInt(document.getElementById("n").value); // Gets inputted grid size
   let table = document.getElementById("laukums"); // Gets the table
   table.innerHTML = ''; // Clears the table of old content
@@ -212,6 +213,7 @@ window.onload = () => {
       window.addEventListener('resize', fitToScreen);
       window.addEventListener('load', fitToScreen);
     }).catch((err) => alert(err));
+
 };
 
 

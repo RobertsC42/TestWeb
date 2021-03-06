@@ -9,6 +9,14 @@ var solved;
 // Required score
 var required;
 
+// Start time
+
+var startTime;
+
+
+// Did already click  
+var clickedFirst;
+
 
 //Finds the best font for text to fit width
 function generateBestFontSize(text, width){
@@ -68,12 +76,17 @@ function removeClicked(element){
 
 function win(){
   confetti.start();
-  alert('good job you won')
+  let now = new Date().getTime() / 1000;
+  let time = now-startTime;
+  let text = document.getElementById('winText');
+  text.innerHTML = `Apsveicu, uzvarēji! Laiks ir ${time.toFixed(3)} sekundes`;
+  $('#ex1').modal('show');
 }
 
 
 function poga(){
   confetti.stop();
+  clickedFirst = false;
   let n = parseInt(document.getElementById("n").value); // Gets inputted grid size
   let table = document.getElementById("laukums"); // Gets the table
   table.innerHTML = ''; // Clears the table of old content
@@ -118,6 +131,10 @@ function poga(){
             // console.log("its clickable")
             if(buttonData[this.id].open === false){
               // console.log('yep this is true');
+              if(!clickedFirst){
+                clickedFirst = true;
+                startTime = new Date().getTime() / 1000;
+              }
               if(buttonStack.length == 2){
                 // console.log("time to remove from stack")
                 if(buttonData[buttonStack[0]].id == buttonData[buttonStack[1]].id){

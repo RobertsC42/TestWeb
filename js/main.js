@@ -76,7 +76,7 @@ function poga(){
       if(i*n+j < content.length){
         let button = document.createElement('BUTTON');
         button.classList.add("grid")
-        button.classList.add('flip-container')
+        //button.classList.add('flip-container')
         // let fN =  pairs[i*n+j][0];
         //button.style.background = `url(svg/${fN}) center no-repeat`
         button.style.backgroundSize = 'contain';
@@ -85,12 +85,15 @@ function poga(){
         cell.appendChild(button);
         buttons.push(button);
         button.addEventListener('click', function() {
-          console.log("Clicked from " + this.id.data);
+          console.log("Clicked from " + this.id);
         });
+        let container = document.createElement('div');
+        container.classList.add('flip-container');
+        button.appendChild(container);
         // time for divs 
         let mainFlipper = document.createElement('div');
         mainFlipper.classList.add('flipper');
-        button.appendChild(mainFlipper);
+        container.appendChild(mainFlipper);
         // front div
         let front = document.createElement('div');
         front.classList.add('front');
@@ -110,12 +113,15 @@ function poga(){
   let k =0;
   while(content.length>0){
     let data = content.splice(Math.floor(Math.random()*content.length), 1)[0];
-    console.log(data);
+    // console.log(data);
     // buttons[k].id = data;
     // buttons[k].data = data.data;
-    console.log(buttons[k]);
-    frontDivs[k].style.background = '#6DB3F2';
-    buttons[k].style.backgroundSize = 'contain';
+    // console.log(buttons[k]);
+    frontDivs[k].style.background = data.data;
+    frontDivs[k].style.backgroundSize = 'contain';
+
+    backDivs[k].style.background = 'black';
+    backDivs[k].style.backgroundSize = 'contain';
     k++;
   }
 
@@ -142,6 +148,7 @@ window.onload = () => {
 function fitToScreen(){
 
   let elements = document.getElementsByTagName('td');
+  
   let table = document.getElementById("laukums");
 
   const vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
@@ -153,8 +160,15 @@ function fitToScreen(){
   let size = (Math.min(width, height)/((Math.sqrt(elements.length))));
   for(let i=0; i< elements.length; i++){
     //elements[i].style.visibility = "visible";
+    let children = elements[i].getElementsByTagName("*");
+    for(let i=0; i< children.length; i++){
+      let child = children[i];
+      child.style.width = `${size}px`
+      child.style.height = `${size}px`
+    }
     elements[i].style.width = `${size}px`;
     elements[i].style.height = `${size}px`;
+    console.log(children);
   }
 
   table.style.width = width;

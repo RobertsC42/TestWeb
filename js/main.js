@@ -2,6 +2,12 @@
 var countryData;
 // Each button has custom data, that unfortunately couldn't have been added to this
 var buttonData;
+// Current stack of buttons
+var buttonStack;
+// Score
+var solved;
+// Required score
+var required;
 
 
 //Finds the best font for text to fit width
@@ -54,6 +60,17 @@ function generatePairs(n){
 
 
 // The function that is executed upon generate play area
+
+function removeClicked(element){
+  element.getElementsByClassName('flipper')[0].classList.remove('clicked');
+}
+
+
+function win(){
+  alert('good job you won')
+}
+
+
 function poga(){
   
   let n = parseInt(document.getElementById("n").value); // Gets inputted grid size
@@ -78,6 +95,10 @@ function poga(){
   let buttons = new Array();
   let frontDivs = new Array();
   let backDivs = new Array(); 
+
+  //Gets the required points
+  required = content.length;
+
   //Generates button grid
   for(let i =0; i< n; i++){
     let row = table.insertRow(i);
@@ -92,17 +113,43 @@ function poga(){
         // Main function that happens upon button press
         button.addEventListener('click', function() {
           let flipper = this.getElementsByClassName('flipper')[0];
-          // console.log(flipper);
           if(buttonData[this.id].clickable){
+            // console.log("its clickable")
             if(buttonData[this.id].open === false){
+              // console.log('yep this is true');
+              if(buttonStack.length == 2){
+                // console.log("time to remove from stack")
+                if(buttonData[buttonStack[0]].id == buttonData[buttonStack[1]].id){
+                  // console.log("yep it was solved");
+                  solved+=2;
+                  buttonData[buttonStack[1]].clickable = false;
+                  buttonData[buttonStack[0]].clickable = false;
+                  // console.log(required);
+                  // console.log(solved);
+                  // console.log('this')
 
+                }else{
+                  // console.log("nope it was not solved")
+                  removeClicked(document.getElementById(buttonStack[0]))
+                  removeClicked(document.getElementById(buttonStack[1]))
+                }
+                buttonData[buttonStack[0]].open = false;
+                buttonData[buttonStack[1]].open = false;
+                buttonStack = [];
+
+              
+              }
+              
+              buttonData[this.id].open = true;
+              buttonStack.push(this.id)
               flipper.classList.add('clicked');
-            }else{
-              flipper.classList.remove('clicked');
+
+              if(buttonStack.length== 2 && solved+2 === required && (buttonData[buttonStack[0]].id === buttonData[buttonStack[1]].id)){
+                win();
+              }
+
             }
           }
-
-          buttonData[this.id].open = !buttonData[this.id].open;
         });
         let container = document.createElement('div');
         container.classList.add('flip-container');
@@ -129,6 +176,8 @@ function poga(){
   // Adds data to buttonData and also add text and drawing to backDivs
   let k =0;
   buttonData = {};
+  buttonStack = [];
+  solved = 0;
   while(content.length>0){
     let data = content.splice(Math.floor(Math.random()*content.length), 1)[0];
     data.clickable = true;

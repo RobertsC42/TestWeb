@@ -54,13 +54,15 @@ function poga(){
 
   // Transforms flags and names into viewable content
   let content = new Array();
+  let id = 0;
   for(result in pairs){
-    content.push(`url(svg/${pairs[result][0]}) center no-repeat, #6DB3F2`)
+    content.push({data :`url(svg/${pairs[result][0]}) center no-repeat, #6DB3F2`, id: id});
     //let fontSize = Math.floor(450/pairs[result][1].length);
     let fontSize = generateBestFontSize(`${pairs[result][1]}`, 300)
-    content.push(`url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='300px' width='300px'> \
+    content.push({data : `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='300px' width='300px'> \
     <text x='0%' y='60%' fill='black' font-family='arial' font-size='${fontSize}px' >${pairs[result][1]}</text>\
-    </svg>") center no-repeat, #6DB3F2`)
+    </svg>") center no-repeat, #6DB3F2`, id: id});
+    id++;
   }
   
 
@@ -79,13 +81,21 @@ function poga(){
         let cell = row.insertCell(j);
         cell.appendChild(button);
         buttons.push(button);
+        button.addEventListener('click', function() {
+          console.log("Clicked from " + this.id.data);
+        });
       }
     }   
   }
 
   let k =0;
   while(content.length>0){
-    buttons[k].style.background = content.splice(Math.floor(Math.random()*content.length), 1);
+    let data = content.splice(Math.floor(Math.random()*content.length), 1)[0];
+    console.log(data);
+    buttons[k].id = data;
+    // buttons[k].data = data.data;
+    console.log(buttons[k]);
+    buttons[k].style.background = '#6DB3F2';
     buttons[k].style.backgroundSize = 'contain';
     k++;
   }

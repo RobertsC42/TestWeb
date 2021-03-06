@@ -1,6 +1,10 @@
+// Stores country data from the json
 var countryData;
+// Each button has custom data, that unfortunately couldn't have been added to this
 var buttonData;
 
+
+//Finds the best font for text to fit width
 function generateBestFontSize(text, width){
   let min = 1;
   let max = 100;
@@ -22,6 +26,8 @@ function generateBestFontSize(text, width){
   return best;
 }
 
+
+//Find the text width of text
 function getTextWidth(text, font) {
   // re-use canvas object for better performance
   var canvas = getTextWidth.canvas || (getTextWidth.canvas = document.createElement("canvas"));
@@ -31,6 +37,8 @@ function getTextWidth(text, font) {
   return metrics.width;
 }
 
+
+// Generates the pairs of country names and flags
 function generatePairs(n){
   let arr = new Array();
   for (const key in countryData){
@@ -44,9 +52,11 @@ function generatePairs(n){
 }
 
 
+
+// The function that is executed upon generate play area
 function poga(){
   
-  let n = parseInt(document.getElementById("n").value); // Gets inputed grid size
+  let n = parseInt(document.getElementById("n").value); // Gets inputted grid size
   let table = document.getElementById("laukums"); // Gets the table
   table.innerHTML = ''; // Clears the table of old content
   let pairs = generatePairs((n*n-(n%2))/2); // Generate pairs of flags and names
@@ -64,21 +74,22 @@ function poga(){
   }
   
 
-  //Generate buttons 
+  // Temporarily stores the buttons frontDivs and backDivs
   let buttons = new Array();
   let frontDivs = new Array();
   let backDivs = new Array(); 
+  //Generates button grid
   for(let i =0; i< n; i++){
     let row = table.insertRow(i);
     for(let j =0; j< n; j++){
       if(i*n+j < content.length){
         let button = document.createElement('BUTTON');
         button.classList.add("grid")
-        button.style.backgroundSize = 'contain';
-        var text = document.createTextNode(i*n+j+1);
         let cell = row.insertCell(j);
         cell.appendChild(button);
         buttons.push(button);
+
+        // Main function that happens upon button press
         button.addEventListener('click', function() {
           let flipper = this.getElementsByClassName('flipper')[0];
           // console.log(flipper);
@@ -115,7 +126,7 @@ function poga(){
       }
     }   
   }
-
+  // Adds data to buttonData and also add text and drawing to backDivs
   let k =0;
   buttonData = {};
   while(content.length>0){
@@ -132,14 +143,15 @@ function poga(){
     backDivs[k].style.backgroundSize = 'contain';
     k++;
   }
-
+  // Resizes the grid to fit to screen
   fitToScreen();
 
 }
 
 
-
+// Function that executes upon window load
 window.onload = () => {
+  // Loads the json file that contain country data
   fetch("nosaukumi.json")
     .then(response => response.json())
     .then((json) => {
@@ -153,6 +165,8 @@ window.onload = () => {
     }).catch((err) => alert(err));
 };
 
+
+// Function that ensures that the grid fits to screen
 function fitToScreen(){
 
   let elements = document.getElementsByTagName('td');
@@ -164,11 +178,9 @@ function fitToScreen(){
   const vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
   let width = vw
   let height = vh - table.getBoundingClientRect().top;
-  
-  // let size = Math.floor(Math.min(width, height)/(Math.floor(Math.sqrt(elements.length))+1));
+  // Calculate the size of each button in the grid, and applies it to each child and button
   let size = (Math.min(width, height)/((Math.sqrt(elements.length)+0.5)));
   for(let i=0; i< elements.length; i++){
-    //elements[i].style.visibility = "visible";
     let children = elements[i].getElementsByTagName("*");
     for(let i=0; i< children.length; i++){
       let child = children[i];
@@ -178,7 +190,7 @@ function fitToScreen(){
     elements[i].style.width = `${size}px`;
     elements[i].style.height = `${size}px`;
   }
-
+  // Calculates and puts the needed offset from top for the grid
   let offset = (height-Math.min(width, height))/2;
 
   laukumsContainer.style.marginTop = `${offset}px`;

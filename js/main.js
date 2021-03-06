@@ -1,5 +1,5 @@
 var countryData;
-
+var buttonData;
 
 function generateBestFontSize(text, width){
   let min = 1;
@@ -10,7 +10,6 @@ function generateBestFontSize(text, width){
   let lastpivot = -1;
   let pivot = Math.floor((min+max)/2);
   while(lastpivot !== pivot){
-    // console.log(pivot);
     if(getTextWidth(text, `${pivot}px arial`) > width){
       max = pivot;
     }else{
@@ -56,12 +55,11 @@ function poga(){
   let content = new Array();
   let id = 0;
   for(result in pairs){
-    content.push({data :`url(svg/${pairs[result][0]}) center no-repeat, #6DB3F2`, id: id});
-    //let fontSize = Math.floor(450/pairs[result][1].length);
+    content.push({data :`url(svg/${pairs[result][0]}) center no-repeat, #6DB3F2`, id: id, open:false});
     let fontSize = generateBestFontSize(`${pairs[result][1]}`, 300)
     content.push({data : `url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='300px' width='300px'> \
     <text x='0%' y='60%' fill='black' font-family='arial' font-size='${fontSize}px' >${pairs[result][1]}</text>\
-    </svg>") center no-repeat, #6DB3F2`, id: id});
+    </svg>") center no-repeat, #6DB3F2`, id: id, open:false});
     id++;
   }
   
@@ -76,16 +74,24 @@ function poga(){
       if(i*n+j < content.length){
         let button = document.createElement('BUTTON');
         button.classList.add("grid")
-        //button.classList.add('flip-container')
-        // let fN =  pairs[i*n+j][0];
-        //button.style.background = `url(svg/${fN}) center no-repeat`
         button.style.backgroundSize = 'contain';
         var text = document.createTextNode(i*n+j+1);
         let cell = row.insertCell(j);
         cell.appendChild(button);
         buttons.push(button);
         button.addEventListener('click', function() {
-          console.log("Clicked from " + this.id);
+          let flipper = this.getElementsByClassName('flipper')[0];
+          // console.log(flipper);
+          if(buttonData[this.id].clickable){
+            if(buttonData[this.id].open === false){
+
+              flipper.classList.add('clicked');
+            }else{
+              flipper.classList.remove('clicked');
+            }
+          }
+
+          buttonData[this.id].open = !buttonData[this.id].open;
         });
         let container = document.createElement('div');
         container.classList.add('flip-container');
@@ -111,12 +117,14 @@ function poga(){
   }
 
   let k =0;
+  buttonData = {};
   while(content.length>0){
     let data = content.splice(Math.floor(Math.random()*content.length), 1)[0];
-    // console.log(data);
-    // buttons[k].id = data;
+    data.clickable = true;
+    buttons[k].id = k;
+    //Add data
+    buttonData[k] = data;
     // buttons[k].data = data.data;
-    // console.log(buttons[k]);
     frontDivs[k].style.background = '#6DB3F2';
     frontDivs[k].style.backgroundSize = 'contain';
 
@@ -169,7 +177,6 @@ function fitToScreen(){
     }
     elements[i].style.width = `${size}px`;
     elements[i].style.height = `${size}px`;
-    console.log(children);
   }
 
   let offset = (height-Math.min(width, height))/2;

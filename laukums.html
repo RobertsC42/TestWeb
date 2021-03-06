@@ -8,13 +8,13 @@
   <script src="js/main.js"></script>
 </head>
 <body>
-   <form class = "centerable" id='form'>
+   <form onsubmit="poga();return false;" class = "centerable" id='form'>
     <label class="scalable" for "n">Laukuma malas izmērs</label>
     <input class="scalable" type = "number" id="n" name="n" value="3" min="2" max = "19">
 
   </form>
   <button style ="margin: 0 auto; display:block;" class="scalable" id="generate">Izveidot laukumu</button>
-  <div class="centerable">
+  <div id='laukumsContainer' class="centerable">
     <table id="laukums"></table>
   </div>
 </body>

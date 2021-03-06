@@ -148,6 +148,7 @@ window.onload = () => {
 function fitToScreen(){
 
   let elements = document.getElementsByTagName('td');
+  let laukumsContainer = document.getElementById('laukumsContainer');
   
   let table = document.getElementById("laukums");
 
@@ -170,6 +171,11 @@ function fitToScreen(){
     elements[i].style.height = `${size}px`;
     console.log(children);
   }
+
+  let offset = (height-Math.min(width, height))/2;
+
+  laukumsContainer.style.marginTop = `${offset}px`;
+
 
   table.style.width = width;
   table.style.height = height

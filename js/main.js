@@ -117,10 +117,10 @@ function poga(){
     // buttons[k].id = data;
     // buttons[k].data = data.data;
     // console.log(buttons[k]);
-    frontDivs[k].style.background = data.data;
+    frontDivs[k].style.background = '#6DB3F2';
     frontDivs[k].style.backgroundSize = 'contain';
 
-    backDivs[k].style.background = 'black';
+    backDivs[k].style.background = data.data;
     backDivs[k].style.backgroundSize = 'contain';
     k++;
   }
@@ -157,7 +157,7 @@ function fitToScreen(){
   let height = vh - table.getBoundingClientRect().top;
   
   // let size = Math.floor(Math.min(width, height)/(Math.floor(Math.sqrt(elements.length))+1));
-  let size = (Math.min(width, height)/((Math.sqrt(elements.length))));
+  let size = (Math.min(width, height)/((Math.sqrt(elements.length)+0.5)));
   for(let i=0; i< elements.length; i++){
     //elements[i].style.visibility = "visible";
     let children = elements[i].getElementsByTagName("*");

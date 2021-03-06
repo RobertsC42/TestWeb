@@ -67,13 +67,16 @@ function poga(){
   
 
   //Generate buttons 
-  let buttons = new Array(); 
+  let buttons = new Array();
+  let frontDivs = new Array();
+  let backDivs = new Array(); 
   for(let i =0; i< n; i++){
     let row = table.insertRow(i);
     for(let j =0; j< n; j++){
       if(i*n+j < content.length){
         let button = document.createElement('BUTTON');
         button.classList.add("grid")
+        button.classList.add('flip-container')
         // let fN =  pairs[i*n+j][0];
         //button.style.background = `url(svg/${fN}) center no-repeat`
         button.style.backgroundSize = 'contain';
@@ -84,6 +87,22 @@ function poga(){
         button.addEventListener('click', function() {
           console.log("Clicked from " + this.id.data);
         });
+        // time for divs 
+        let mainFlipper = document.createElement('div');
+        mainFlipper.classList.add('flipper');
+        button.appendChild(mainFlipper);
+        // front div
+        let front = document.createElement('div');
+        front.classList.add('front');
+        mainFlipper.appendChild(front);
+        frontDivs.push(front);
+        // back div
+        let back = document.createElement('div');
+        back.classList.add('back');
+        mainFlipper.appendChild(back);
+        backDivs.push(back);
+
+
       }
     }   
   }
@@ -92,10 +111,10 @@ function poga(){
   while(content.length>0){
     let data = content.splice(Math.floor(Math.random()*content.length), 1)[0];
     console.log(data);
-    buttons[k].id = data;
+    // buttons[k].id = data;
     // buttons[k].data = data.data;
     console.log(buttons[k]);
-    buttons[k].style.background = '#6DB3F2';
+    frontDivs[k].style.background = '#6DB3F2';
     buttons[k].style.backgroundSize = 'contain';
     k++;
   }

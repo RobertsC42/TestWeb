@@ -79,8 +79,14 @@ function win(){
   let now = new Date().getTime() / 1000;
   let time = now-startTime;
   let text = document.getElementById('winText');
-  text.innerHTML = `Apsveicu, uzvarēji! Laiks ir ${time.toFixed(3)} sekundes`;
+  fetch('https://api.chucknorris.io/jokes/random')
+  .then(res => res.json())
+  .then((res) =>{
+  console.log('text');
+  text.innerHTML = `Apsveicu, uzvarēji! Laiks ir ${time.toFixed(3)} sekundes\n
+  Random Chuck Norris fact ${res}`;
   $('#ex1').modal('show');
+  });
 }
 
 

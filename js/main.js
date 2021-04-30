@@ -84,7 +84,7 @@ function win(){
   .then((res) =>{
   console.log('text');
   text.innerHTML = `Apsveicu, uzvarēji! Laiks ir ${time.toFixed(3)} sekundes\n
-  Random Chuck Norris fact ${res}`;
+  Random Chuck Norris fact ${res["value"]}`;
   $('#ex1').modal('show');
   });
 }
